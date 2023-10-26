@@ -1,24 +1,43 @@
-import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import ContactForm from './Contact/ContactForm';
+// App.jsx
+import React from 'react';
+import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
+import Register from './Register/Register';
+import Login from './Login/Login';
 import ContactList from './Contact/ContactList';
+import ContactForm from './Contact/ContactForm';
 import Filter from './Filter/Filter';
+import UserMenu from './UserMenu/UserMenu'; // Импортируем компонент UserMenu
 
 const App = () => {
-  const contacts = useSelector(state => state.contacts.contacts);
-
-  useEffect(() => {
-    localStorage.setItem('contacts', JSON.stringify(contacts));
-  }, [contacts]);
-
   return (
-    <div>
-      <h1>Phonebook</h1>
-      <ContactForm />
-      <h2>Contacts</h2>
-      <Filter />
-      <ContactList />
-    </div>
+    <Router>
+      <div>
+        <h1>Phonebook</h1>
+        <nav>
+          <ul>
+            <UserMenu /> {/* Отображаем UserMenu */}
+            <li>
+              <Link to="/contacts">Contacts</Link>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <Routes>
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route
+          path="/contacts"
+          element={
+            <div>
+              <ContactForm />
+              <ContactList />
+              <Filter />
+            </div>
+          }
+        />
+      </Routes>
+    </Router>
   );
 };
 

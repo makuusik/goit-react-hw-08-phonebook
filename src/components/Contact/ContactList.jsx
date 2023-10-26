@@ -10,8 +10,10 @@ const ContactList = () => {
   const error = useSelector(state => state.contacts.error);
 
   React.useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
+    if (contacts.length === 0) {
+      dispatch(fetchContacts());
+    }
+  }, [dispatch, contacts]);
 
   const handleDeleteContact = id => {
     dispatch(deleteContact(id));
