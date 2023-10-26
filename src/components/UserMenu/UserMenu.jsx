@@ -1,14 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../redux/userSlice';
 import { Link } from 'react-router-dom';
+import { loginSuccess, logout } from '../redux/userSlice';
 
 const UserMenu = () => {
   const user = useSelector(state => state.user);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    if (isLoggedIn) {
+      dispatch(loginSuccess());
+    }
+  }, [dispatch]);
+
   const handleLogout = () => {
     dispatch(logout());
+    localStorage.setItem('isLoggedIn', 'false');
   };
 
   return (
@@ -16,12 +24,12 @@ const UserMenu = () => {
       {user.isLoggedIn ? (
         <div>
           <p>{user.email}</p>
-          <button onClick={handleLogout}>Logout</button>
+          <button onClick={handleLogout}>Выход из аккаунта</button>
         </div>
       ) : (
         <div>
-          <Link to="/login">Login</Link>
-          <Link to="/register">Register</Link>
+          <Link to="/login">Вход</Link>
+          <Link to="/register">Регистрация</Link>
         </div>
       )}
     </div>

@@ -30,7 +30,8 @@ const Login = () => {
 
         navigate('/contacts');
 
-        console.log('Login successful');
+        console.log('Успешный вход');
+        localStorage.setItem('isLoggedIn', 'true');
       } else {
         setError('Неверные email или пароль');
       }
@@ -54,7 +55,7 @@ const Login = () => {
         value={password}
         onChange={e => setPassword(e.target.value)}
       />
-      <button onClick={handleLogin}>Login</button>
+      <button onClick={handleLogin}>Вход</button>
       {error && <p style={{ color: 'red' }}>{error}</p>}
     </div>
   );

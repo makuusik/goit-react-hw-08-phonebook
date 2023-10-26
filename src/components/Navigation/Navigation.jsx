@@ -6,13 +6,13 @@ const Navigation = () => {
     <nav>
       <ul>
         <li>
-          <Link to="/register">Register</Link>
+          <Link to="/register">Регистрация</Link>
         </li>
         <li>
-          <Link to="/login">Login</Link>
+          <Link to="/login">Вход</Link>
         </li>
         <li>
-          <Link to="/contacts">Contacts</Link>
+          <Link to="/contacts">Контакты</Link>
         </li>
       </ul>
     </nav>

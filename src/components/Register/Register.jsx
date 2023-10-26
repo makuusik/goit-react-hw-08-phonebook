@@ -33,6 +33,7 @@ const Register = () => {
         navigate('/contacts');
 
         console.log('Registration successful');
+        localStorage.setItem('isLoggedIn', 'true');
       } else {
         setError(
           'Не удалось зарегистрировать пользователя. Попробуйте другой email и пароль.'
@@ -45,7 +46,7 @@ const Register = () => {
 
   return (
     <div>
-      <h2>Register</h2>
+      <h2>Регистрация</h2>
       <input
         type="text"
         placeholder="Name"
@@ -64,7 +65,7 @@ const Register = () => {
         value={password}
         onChange={e => setPassword(e.target.value)}
       />
-      <button onClick={handleRegister}>Register</button>
+      <button onClick={handleRegister}>Регистрация</button>
       {error && <p style={{ color: 'red' }}>{error}</p>}
     </div>
   );
