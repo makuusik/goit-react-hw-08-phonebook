@@ -1,8 +1,7 @@
-// UserMenu.jsx
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../redux/userSlice';
-import { Link } from 'react-router-dom'; // Импортируем Link
+import { Link } from 'react-router-dom';
 
 const UserMenu = () => {
   const user = useSelector(state => state.user);
@@ -14,7 +13,7 @@ const UserMenu = () => {
 
   return (
     <div>
-      {user.isLoggedIn ? ( // Проверяем, вошел ли пользователь
+      {user.isLoggedIn ? (
         <div>
           <p>{user.email}</p>
           <button onClick={handleLogout}>Logout</button>

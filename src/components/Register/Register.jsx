@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { loginSuccess } from '../redux/userSlice';
-import { useNavigate } from 'react-router-dom'; // Используем useNavigate вместо useHistory
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -10,7 +10,7 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const dispatch = useDispatch();
-  const navigate = useNavigate(); // Используем useNavigate для перенаправления
+  const navigate = useNavigate();
 
   const handleRegister = async () => {
     try {
@@ -24,17 +24,13 @@ const Register = () => {
       );
 
       if (response.status === 201) {
-        // Регистрация успешна, обрабатываем токен (по сути, это же как успешный вход)
         const token = response.data.token;
 
-        // Здесь вы можете сохранить токен в хранилище (например, localStorage)
         localStorage.setItem('token', token);
 
-        // Диспетчеризовать действие loginSuccess, чтобы отметить успешную регистрацию
         dispatch(loginSuccess());
 
-        // Выполните переадресацию на страницу "Контакты"
-        navigate('/contacts'); // Используем navigate для перенаправления
+        navigate('/contacts');
 
         console.log('Registration successful');
       } else {
@@ -49,8 +45,27 @@ const Register = () => {
 
   return (
     <div>
-      <h2>Регистрация</h2>
-      {/* ... остальной код как в предыдущем ответе ... */}
+      <h2>Register</h2>
+      <input
+        type="text"
+        placeholder="Name"
+        value={name}
+        onChange={e => setName(e.target.value)}
+      />
+      <input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={e => setEmail(e.target.value)}
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={e => setPassword(e.target.value)}
+      />
+      <button onClick={handleRegister}>Register</button>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
     </div>
   );
 };

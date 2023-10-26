@@ -1,4 +1,3 @@
-// App.jsx
 import React from 'react';
 import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
 import Register from './Register/Register';
@@ -6,7 +5,7 @@ import Login from './Login/Login';
 import ContactList from './Contact/ContactList';
 import ContactForm from './Contact/ContactForm';
 import Filter from './Filter/Filter';
-import UserMenu from './UserMenu/UserMenu'; // Импортируем компонент UserMenu
+import UserMenu from './UserMenu/UserMenu';
 
 const App = () => {
   return (
@@ -15,7 +14,7 @@ const App = () => {
         <h1>Phonebook</h1>
         <nav>
           <ul>
-            <UserMenu /> {/* Отображаем UserMenu */}
+            <UserMenu />
             <li>
               <Link to="/contacts">Contacts</Link>
             </li>
