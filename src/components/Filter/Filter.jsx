@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setFilter } from '../redux/contactsSlice';
+import { FilterContainer } from './FilterStyled';
 
 const Filter = () => {
   const dispatch = useDispatch();
@@ -12,7 +13,7 @@ const Filter = () => {
   };
 
   return (
-    <label>
+    <FilterContainer>
       Фильтр по имени:
       <input
         type="text"
@@ -20,7 +21,7 @@ const Filter = () => {
         onChange={handleFilterChange}
         placeholder="Фильтр контактов по имени"
       />
-    </label>
+    </FilterContainer>
   );
 };
 

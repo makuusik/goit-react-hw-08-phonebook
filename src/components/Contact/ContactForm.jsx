@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from '../redux/contactsSlice';
+import {
+  ErrorMessage,
+  ContactFormContainer,
+  ContactInput,
+  ContactButton,
+} from './ContactFormStyled';
 
 const ContactForm = () => {
   const dispatch = useDispatch();
@@ -55,7 +61,9 @@ const ContactForm = () => {
       const data = await response.json();
       dispatch(addContact(data));
     } else {
-      console.error('Ошибка в добавлении контакта');
+      <ErrorMessage>
+        console.error('Ошибка в добавлении контакта');
+      </ErrorMessage>;
     }
 
     setName('');
@@ -65,27 +73,27 @@ const ContactForm = () => {
   return (
     <form onSubmit={handleSubmit}>
       {duplicateError && <p style={{ color: 'red' }}>{duplicateError}</p>}
-      <label>
+      <ContactFormContainer>
         Имя:
-        <input
+        <ContactInput
           type="text"
           name="name"
           value={name}
           onChange={e => setName(e.target.value)}
           required
         />
-      </label>
-      <label>
+      </ContactFormContainer>
+      <ContactFormContainer>
         Номер телефона:
-        <input
+        <ContactInput
           type="text"
           name="number"
           value={number}
           onInput={handleNumberChange}
           required
         />
-      </label>
-      <button type="submit">Добавить контакт</button>
+      </ContactFormContainer>
+      <ContactButton type="submit">Добавить контакт</ContactButton>
     </form>
   );
 };

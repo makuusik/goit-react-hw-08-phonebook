@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { loginSuccess } from '../redux/userSlice';
 import { useNavigate } from 'react-router-dom';
+import { LoginContainer, LoginForm } from './LoginStyled';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -41,23 +42,28 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <LoginContainer>
       <h2>Login</h2>
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={e => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={e => setPassword(e.target.value)}
-      />
+      <LoginForm>
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+        />
+      </LoginForm>
+      <LoginForm>
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+        />
+      </LoginForm>
+
       <button onClick={handleLogin}>Вход</button>
       {error && <p style={{ color: 'red' }}>{error}</p>}
-    </div>
+    </LoginContainer>
   );
 };
 

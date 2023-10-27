@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { loginSuccess } from '../redux/userSlice';
 import { useNavigate } from 'react-router-dom';
+import { RegisterContainer, RegisterForm } from './RegisterStyled';
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -45,29 +46,36 @@ const Register = () => {
   };
 
   return (
-    <div>
+    <RegisterContainer>
       <h2>Регистрация</h2>
-      <input
-        type="text"
-        placeholder="Name"
-        value={name}
-        onChange={e => setName(e.target.value)}
-      />
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={e => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={e => setPassword(e.target.value)}
-      />
+      <RegisterForm>
+        <input
+          type="text"
+          placeholder="Name"
+          value={name}
+          onChange={e => setName(e.target.value)}
+        />
+      </RegisterForm>
+      <RegisterForm>
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+        />
+      </RegisterForm>
+      <RegisterForm>
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+        />
+      </RegisterForm>
+
       <button onClick={handleRegister}>Регистрация</button>
       {error && <p style={{ color: 'red' }}>{error}</p>}
-    </div>
+    </RegisterContainer>
   );
 };
 

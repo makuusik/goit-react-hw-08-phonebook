@@ -13,15 +13,18 @@ import ContactList from './Contact/ContactList';
 import ContactForm from './Contact/ContactForm';
 import Filter from './Filter/Filter';
 import UserMenu from './UserMenu/UserMenu';
+import { AppContainer, Nav, AppTitle } from './AppStyled';
 
 const App = () => {
   const user = useSelector(state => state.user);
 
   return (
-    <Router basename="/goit-react-hw-08-phonebook">
-      <div>
-        <h1>Книга контактов</h1>
-        <nav>
+    <AppContainer>
+      <Router>
+        {/* basename="/goit-react-hw-08-phonebook" */}
+
+        <AppTitle>Книга контактов</AppTitle>
+        <Nav>
           <ul>
             <UserMenu />
             {user.isLoggedIn && (
@@ -30,33 +33,34 @@ const App = () => {
               </li>
             )}
           </ul>
-        </nav>
-      </div>
+        </Nav>
 
-      <Routes>
-        {user.isLoggedIn ? (
-          <>
-            <Route
-              path="/contacts"
-              element={
-                <div>
-                  <ContactForm />
-                  <ContactList />
-                  <Filter />
-                </div>
-              }
-            />
-            <Route path="/login" element={<Navigate to="/contacts" />} />
-            <Route path="/register" element={<Navigate to="/contacts" />} />
-          </>
-        ) : (
-          <>
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-          </>
-        )}
-      </Routes>
-    </Router>
+        <Routes>
+          {user.isLoggedIn ? (
+            <>
+              <Route
+                path="/contacts"
+                element={
+                  <AppContainer>
+                    <ContactForm />
+                    <ContactList />
+                    <Filter />
+                  </AppContainer>
+                }
+              />
+
+              <Route path="/login" element={<Navigate to="/contacts" />} />
+              <Route path="/register" element={<Navigate to="/contacts" />} />
+            </>
+          ) : (
+            <>
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+            </>
+          )}
+        </Routes>
+      </Router>
+    </AppContainer>
   );
 };
 

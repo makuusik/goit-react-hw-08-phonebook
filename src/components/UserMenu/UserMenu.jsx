@@ -2,6 +2,12 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { loginSuccess, logout } from '../redux/userSlice';
+import {
+  AuthLinks,
+  LogoutButton,
+  UserInfo,
+  UserMenuContainer,
+} from './UserMenuStyled';
 
 const UserMenu = () => {
   const user = useSelector(state => state.user);
@@ -20,19 +26,19 @@ const UserMenu = () => {
   };
 
   return (
-    <div>
+    <UserMenuContainer>
       {user.isLoggedIn ? (
         <div>
-          <p>{user.email}</p>
-          <button onClick={handleLogout}>Выход из аккаунта</button>
+          <UserInfo>{user.email}</UserInfo>
+          <LogoutButton onClick={handleLogout}>Выход из аккаунта</LogoutButton>
         </div>
       ) : (
-        <div>
+        <AuthLinks>
           <Link to="/login">Вход</Link>
           <Link to="/register">Регистрация</Link>
-        </div>
+        </AuthLinks>
       )}
-    </div>
+    </UserMenuContainer>
   );
 };
 

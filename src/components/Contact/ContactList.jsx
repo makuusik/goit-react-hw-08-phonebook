@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteContact, fetchContacts } from '../redux/contactsSlice';
+import { ContactListContainer, ContactListUl } from './ContactListStyled';
 
 const ContactList = () => {
   const dispatch = useDispatch();
@@ -24,13 +25,13 @@ const ContactList = () => {
   );
 
   return (
-    <div>
+    <ContactListContainer>
       {isLoading ? (
         <p>Загрузка...</p>
       ) : error ? (
         <p>Ошибка: {error}</p>
       ) : (
-        <ul>
+        <ContactListUl>
           {filteredContacts && filteredContacts.length > 0 ? (
             filteredContacts.map(contact => (
               <li key={contact.id}>
@@ -46,9 +47,9 @@ const ContactList = () => {
           ) : (
             <p>Контакты не найдены</p>
           )}
-        </ul>
+        </ContactListUl>
       )}
-    </div>
+    </ContactListContainer>
   );
 };
 

@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { NavigationContainer } from './NavigationStyled';
 
 const Navigation = () => {
   return (
     <nav>
-      <ul>
+      <NavigationContainer>
         <li>
           <Link to="/register">Регистрация</Link>
         </li>
@@ -14,7 +15,7 @@ const Navigation = () => {
         <li>
           <Link to="/contacts">Контакты</Link>
         </li>
-      </ul>
+      </NavigationContainer>
     </nav>
   );
 };
