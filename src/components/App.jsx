@@ -18,7 +18,7 @@ const App = () => {
   const user = useSelector(state => state.user);
 
   return (
-    <Router>
+    <Router basename="/goit-react-hw-08-phonebook">
       <div>
         <h1>Книга контактов</h1>
         <nav>
