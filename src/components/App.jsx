@@ -52,11 +52,13 @@ const App = () => {
 
               <Route path="/login" element={<Navigate to="/contacts" />} />
               <Route path="/register" element={<Navigate to="/contacts" />} />
+              <Route path="*" element={<Navigate to="/contacts" />} />
             </>
           ) : (
             <>
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
+              <Route path="*" element={<Navigate to="/login" />} />
             </>
           )}
         </Routes>
