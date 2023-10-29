@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from '../redux/contactsSlice';
+import { addContact } from '../redux/operations/operations';
 import {
-  ErrorMessage,
   ContactFormContainer,
   ContactInput,
   ContactButton,
@@ -46,28 +45,14 @@ const ContactForm = () => {
       return;
     }
 
-    const response = await fetch(
-      'https://652a7f1f4791d884f1fcff54.mockapi.io/contacts',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ name, number }),
-      }
-    );
+    const response = await dispatch(addContact({ name, number }));
 
-    if (response.ok) {
-      const data = await response.json();
-      dispatch(addContact(data));
+    if (response.payload) {
+      setName('');
+      setNumber('');
     } else {
-      <ErrorMessage>
-        console.error('Ошибка в добавлении контакта');
-      </ErrorMessage>;
+      setDuplicateError('Ошибка в добавлении контакта');
     }
-
-    setName('');
-    setNumber('');
   };
 
   return (

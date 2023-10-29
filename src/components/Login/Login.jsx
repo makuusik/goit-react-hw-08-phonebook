@@ -27,7 +27,7 @@ const Login = () => {
 
         localStorage.setItem('token', token);
 
-        dispatch(loginSuccess());
+        dispatch(loginSuccess(token));
 
         localStorage.setItem('isLoggedIn', 'true');
 
@@ -36,7 +36,6 @@ const Login = () => {
         setError('Неверные email или пароль');
       }
     } catch (error) {
-      console.error(error);
       setError('Произошла ошибка при входе');
     }
   };

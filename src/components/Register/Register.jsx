@@ -33,7 +33,6 @@ const Register = () => {
 
         navigate('/contacts');
 
-        console.log('Registration successful');
         localStorage.setItem('isLoggedIn', 'true');
       } else {
         setError(

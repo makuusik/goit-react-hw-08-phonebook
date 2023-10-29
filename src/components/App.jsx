@@ -20,8 +20,8 @@ const App = () => {
 
   return (
     <AppContainer>
-      <Router>
-        {/* basename="/goit-react-hw-08-phonebook" */}
+      <Router basename="/goit-react-hw-08-phonebook">
+        {}
         {}
 
         <AppTitle>Книга контактов</AppTitle>

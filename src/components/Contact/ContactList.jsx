@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteContact, fetchContacts } from '../redux/contactsSlice';
+import { deleteContact, fetchContacts } from '../redux/operations/operations';
 import { ContactListContainer, ContactListUl } from './ContactListStyled';
 
 const ContactList = () => {
@@ -18,7 +18,6 @@ const ContactList = () => {
     dispatch(deleteContact(id));
   };
 
-  // Проверка на наличие контактов перед фильтрацией
   const filteredContacts = contacts.filter(
     contact =>
       contact &&
