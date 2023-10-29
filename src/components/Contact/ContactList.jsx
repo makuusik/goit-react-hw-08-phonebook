@@ -11,17 +11,19 @@ const ContactList = () => {
   const error = useSelector(state => state.contacts.error);
 
   React.useEffect(() => {
-    if (contacts.length === 0) {
-      dispatch(fetchContacts());
-    }
-  }, [dispatch, contacts]);
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
   const handleDeleteContact = id => {
     dispatch(deleteContact(id));
   };
 
-  const filteredContacts = contacts.filter(contact =>
-    contact.name.toLowerCase().includes(filter?.toLowerCase() || '')
+  // Проверка на наличие контактов перед фильтрацией
+  const filteredContacts = contacts.filter(
+    contact =>
+      contact &&
+      contact.name &&
+      contact.name.toLowerCase().includes(filter?.toLowerCase() || '')
   );
 
   return (
