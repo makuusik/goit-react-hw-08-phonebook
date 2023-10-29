@@ -36,7 +36,7 @@ const App = () => {
           </ul>
         </Nav>
 
-        <Routes>
+        <Routes basename="/goit-react-hw-08-phonebook">
           {user.isLoggedIn ? (
             <>
               <Route
