@@ -1,10 +1,24 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+
+const BASE_URL = 'https://connections-api.herokuapp.com';
+
+const getToken = () => {
+  return localStorage.getItem('token');
+};
 
 export const fetchContacts = createAsyncThunk('contacts/fetchAll', async () => {
   try {
+    const token = getToken();
     const response = await fetch(
-      'https://652a7f1f4791d884f1fcff54.mockapi.io/contacts'
+      'https://connections-api.herokuapp.com/contacts',
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
     );
+
     if (!response.ok) {
       throw new Error('Ошибка');
     }
@@ -17,23 +31,20 @@ export const fetchContacts = createAsyncThunk('contacts/fetchAll', async () => {
 
 export const addContact = createAsyncThunk(
   'contacts/addContact',
-  async contactData => {
+  async newContact => {
     try {
-      const response = await fetch(
-        'https://652a7f1f4791d884f1fcff54.mockapi.io/contacts',
+      const token = getToken();
+      const response = await axios.post(
+        'https://connections-api.herokuapp.com/contacts',
+        newContact,
         {
-          method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify(contactData),
         }
       );
-      if (!response.ok) {
-        throw new Error('Ошибка в добавлении контакта');
-      }
-      const data = await response.json();
-      return data;
+
+      return response.data;
     } catch (error) {
       throw error;
     }
@@ -44,25 +55,33 @@ export const deleteContact = createAsyncThunk(
   'contacts/deleteContact',
   async contactId => {
     try {
-      const response = await fetch(
-        `https://652a7f1f4791d884f1fcff54.mockapi.io/contacts/${contactId}`,
-        {
-          method: 'DELETE',
-        }
-      );
-      if (!response.ok) {
+      const token = getToken();
+      const response = await axios.delete(`${BASE_URL}/contacts/${contactId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.status === 200) {
+        return contactId;
+      } else {
         throw new Error('Ошибка в удалении контакта');
       }
-      return contactId;
     } catch (error) {
       throw error;
     }
   }
 );
 
+const initialState = {
+  items: [],
+  isLoading: false,
+  error: null,
+};
+
 const contactsSlice = createSlice({
   name: 'contacts',
-  initialState: { items: [], isLoading: false, error: null },
+  initialState,
   reducers: {
     setFilter: (state, action) => {
       state.filter = action.payload;

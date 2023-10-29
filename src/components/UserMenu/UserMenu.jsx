@@ -14,15 +14,15 @@ const UserMenu = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-    if (isLoggedIn) {
-      dispatch(loginSuccess());
+    const token = localStorage.getItem('token');
+    if (token) {
+      dispatch(loginSuccess({ token }));
     }
   }, [dispatch]);
 
   const handleLogout = () => {
     dispatch(logout());
-    localStorage.setItem('isLoggedIn', 'false');
+    localStorage.removeItem('token');
   };
 
   return (

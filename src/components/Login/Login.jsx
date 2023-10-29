@@ -29,14 +29,14 @@ const Login = () => {
 
         dispatch(loginSuccess());
 
-        navigate('/contacts');
-
-        console.log('Успешный вход');
         localStorage.setItem('isLoggedIn', 'true');
+
+        navigate('/contacts');
       } else {
         setError('Неверные email или пароль');
       }
     } catch (error) {
+      console.error(error);
       setError('Произошла ошибка при входе');
     }
   };

@@ -29,7 +29,7 @@ const Register = () => {
 
         localStorage.setItem('token', token);
 
-        dispatch(loginSuccess());
+        dispatch(loginSuccess(token));
 
         navigate('/contacts');
 
